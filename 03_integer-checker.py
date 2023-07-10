@@ -1,19 +1,13 @@
 def num_check(question):
     valid = False
     while not valid:
-
-        error = "Please enter a number that is more than zero"
+        error = "Please enter a valid number"
 
         try:
-
             response = int(input(question))
 
-            if response > 0:
-                return response
-
-            else:
-                print(error)
-                print()
+            return response
 
         except ValueError:
             print(error)
+
