@@ -1,21 +1,21 @@
 def play_game():
     while True:
-        level = input("select a level (easy/medium/hard) or (1/2/3): ")
+        level = input("select a level (easy/medium/hard) or (1/2/3): ").lower()
         if level == "easy" or level == "1":
             print("You have selected the easy level.")
 
-            break
+            # break
         elif level == "medium" or level == "2":
             print("You have selected the medium level.")
 
-            break
+            # break
         elif level == "hard" or level == "3":
             print("You have selected the hard level.")
 
-            break
+            # break
         else:
             print("Please choose 'easy', 'medium', or 'hard', or 1, 2 or 3.")
-            continue
+            # continue
 
 
 play_game()
