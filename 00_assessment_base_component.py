@@ -4,11 +4,10 @@ import random
 # display instructions
 def instructions():
     print("Welcome to my algebra quiz")
-    print("You will have to select a level(easy, medium, hard or 1, 2, 3)")
-    print("the computer will generate an equation on the level that you have selected")
-    print("you are trying to find the value of 'x'")
-    print("if you are unsure about the answer just put in any random number and the computer will give you the answer")
-    return ""
+    print("You will have to select a level (easy, medium, hard or 1, 2, 3)")
+    print("The computer will generate an equation based on the selected level")
+    print("You are trying to find the value of 'x'")
+    print("If you are unsure about the answer, just put in any random number and the computer will give you the answer")
 
 
 # yes_no checker
@@ -36,14 +35,37 @@ def num_check(question):
             print(error)
 
 
+# checks the number of questions
+def check_questions():
+    while True:
+        print("Press <enter> to play infinite mode")
+        response = input("How many rounds: ")
+
+        round_error = "Please press <enter> or enter an integer that is more than 0"
+
+        if response != "":
+            try:
+                response = int(response)
+
+                if response < 1:
+                    print(round_error)
+                    continue
+                else:
+                    return response
+
+            except ValueError:
+                print(round_error)
+                continue
+        return response
+
+
 # generate an equation based on the selected level
 def generate_equation(level):
-
-    # if the user chooses level 1 generate easy  equation
-    if level == "easy" or level == "1":
+    # if the user chooses level 1, generate an easy equation
+    if level.lower() == "easy" or level == "1":
         operators = ["*", "-"]
-        x = random.randint(1, 10)
-        y = random.randint(1, 10)
+        x = random.randint(-10, 10)
+        y = random.randint(-10, 10)
         operator = random.choice(operators)
         if operator == "*":
             result = x * y
@@ -51,12 +73,12 @@ def generate_equation(level):
         else:
             result = x - y
             equation = f"x {operator} {y} = {result}"
-    # if the user chooses level 2 generate medium equation
+    # if the user chooses level 2, generate a medium equation
     elif level == "medium" or level == "2":
         operators = ["+", "-"]
-        x = random.randint(1, 10)
-        y = random.randint(1, 10)
-        z = random.randint(1, 10)
+        x = random.randint(-10, 10)
+        y = random.randint(-10, 10)
+        z = random.randint(-10, 10)
         operator = random.choice(operators)
         if operator == "+":
             result = z * x + y
@@ -64,12 +86,12 @@ def generate_equation(level):
         else:
             result = z * x - y
             equation = f"{z}x {operator} {y} = {result}"
-    #
+    # if the user chooses level 3, generate a hard equation
     elif level == "hard" or level == "3":
         operators = ["+", "*", "-"]
-        x = random.randint(1, 10)
-        y = random.randint(1, 10)
-        z = random.randint(1, 10)
+        x = random.randint(-10, 10)
+        y = random.randint(-10, 10)
+        z = random.randint(-10, 10)
         operator = random.choice(operators)
         if operator == "+":
             result = y * x + z * x
@@ -97,25 +119,48 @@ def play_game():
             print(equation)
 
             answer = num_check("x = ")
-
             if answer == x:
                 print("Congratulations! You got the correct answer.")
             else:
                 print(f"Sorry, the correct answer was {x}.")
 
-            play_again = input("Do you want to play again? (yes/no): ")
-            if play_again.lower() != "yes":
-                break
-        else:
-            print("Please choose 'easy', 'medium', or 'hard', or 1, 2, or 3.")
-            continue
+            break
 
 
 # Main routine
-played_before = yes_no("Have you played this game before?")
+played_before = yes_no("Have you played this game before? (yes/no): ")
 
 if played_before == "no":
     instructions()
 
-play_game()
-print("Thank you for playing")
+questions_answered = 0
+
+questions = check_questions()
+if questions == "":
+    mode = "infinite"
+    questions = 5
+else:
+    mode = ""
+
+while True:
+    print()
+    if mode == "infinite":
+        heading = f"Continuous Mode: Question {questions_answered + 1}"
+        questions += 1
+        print(heading)
+    else:
+        heading = f"Question {questions_answered + 1} of {questions}"
+        print(heading)
+
+    choose = input("Press Enter to play or 'xxx' to quit: ")
+    if choose == "xxx":
+        break
+
+    play_game()
+
+    questions_answered += 1
+    if questions_answered == questions:
+        break
+
+print()
+print("Thank you for playing!")

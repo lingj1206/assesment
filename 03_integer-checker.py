@@ -11,3 +11,7 @@ def num_check(question):
         except ValueError:
             print(error)
 
+
+while True:
+    integer = num_check("enter an integer: ")
+    print()

@@ -1,58 +1,55 @@
-def check_rounds():
+def check_questions():
     while True:
         print("press <enter> to play infinite mode")
-        response = input("How many rounds: ")
+        response = input("How many questions: ")
 
-        round_error = "please press <enter>" \
-                      "  or an integer that is more than 0"
+        question_error = "please press <enter> or an integer that is more than 0"
 
         if response != "":
             try:
                 response = int(response)
 
                 if response < 1:
-                    print(round_error)
+                    print(question_error)
                     continue
                 else:
                     return response
 
             except ValueError:
-                print(round_error)
+                print(question_error)
                 continue
         return response
 
 
-rounds_played = 0
+questions_answered = 0
 
-rounds = check_rounds()
-if rounds == "":
+Questions = check_questions()
+if Questions == "":
     mode = "infinite"
-    rounds = 5
+    Questions = 5
 else:
     mode = ""
 
-
-end_game = "no"
-while end_game == "no":
+while True:
 
     error = "please enter an integer that is more than 0"
 
     print()
     if mode == "infinite":
-        heading = f"Continuous Mode: Round {rounds_played + 1}"
-        rounds += 1
+        heading = f"Continuous Mode: Question {questions_answered + 1}"
+        Questions += 1
         print(heading)
 
     else:
-        heading = f"Round {rounds_played + 1} of {rounds}"
+        heading = f"Question {questions_answered + 1} of {Questions}"
         print(heading)
     print("code goes here")
 
     choose = input("")
     if choose == "xxx":
         break
-    rounds_played += 1
-    if rounds_played == rounds:
+    questions_answered += 1
+    if questions_answered == Questions:
         break
 
 print()
