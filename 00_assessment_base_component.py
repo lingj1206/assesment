@@ -3,11 +3,16 @@ import random
 
 # display instructions
 def instructions():
-    print("Welcome to my algebra quiz")
+    print()
+    print("       *****  Welcome to my algebra quiz  *****")
+    print()
     print("You will have to select a level (easy, medium, hard or 1, 2, 3)")
     print("The computer will generate an equation based on the selected level")
     print("You are trying to find the value of 'x'")
-    print("If you are unsure about the answer, just put in any random number and the computer will give you the answer")
+    print("If you are unsure about the answer")
+    print("put in any random number and the computer will give you the answer")
+    print("You only have 1 attempt at each question")
+    print()
 
 
 # yes_no checker
@@ -61,11 +66,11 @@ def check_questions():
 
 # generate an equation based on the selected level
 def generate_equation(level):
+
     # if the user chooses level 1, generate an easy equation
-    if level.lower() == "easy" or level == "1":
+    if level.lower() == "easy" or level == "e" or level == "1":
         operators = ["*", "-"]
-        x = random.randint(-10, 10)
-        y = random.randint(-10, 10)
+        x, y = random.randint(-10, 10)
         operator = random.choice(operators)
         if operator == "*":
             result = x * y
@@ -74,11 +79,9 @@ def generate_equation(level):
             result = x - y
             equation = f"x {operator} {y} = {result}"
     # if the user chooses level 2, generate a medium equation
-    elif level == "medium" or level == "2":
+    elif level.lower() == "medium" or level == "m" or level == "2":
         operators = ["+", "-"]
-        x = random.randint(-10, 10)
-        y = random.randint(-10, 10)
-        z = random.randint(-10, 10)
+        x, y, z = random.randint(-10, 10)
         operator = random.choice(operators)
         if operator == "+":
             result = z * x + y
@@ -87,11 +90,9 @@ def generate_equation(level):
             result = z * x - y
             equation = f"{z}x {operator} {y} = {result}"
     # if the user chooses level 3, generate a hard equation
-    elif level == "hard" or level == "3":
+    elif level.lower() == "hard" or level == "h" or level == "3":
         operators = ["+", "*", "-"]
-        x = random.randint(-10, 10)
-        y = random.randint(-10, 10)
-        z = random.randint(-10, 10)
+        x, y, z = random.randint(-10, 10)
         operator = random.choice(operators)
         if operator == "+":
             result = y * x + z * x
@@ -108,7 +109,7 @@ def generate_equation(level):
     return equation, x
 
 
-# checking answer and asking if they want to play again
+# checking if the answer the user inputted is correct
 def play_game():
     while True:
         level = input("Select a level (easy/medium/hard) or (1/2/3): ")

@@ -14,4 +14,7 @@ def num_check(question):
 
 while True:
     integer = num_check("enter an integer: ")
-    print()
+
+    response = input("")
+    if response == "xxx":
+        break
