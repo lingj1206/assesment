@@ -70,7 +70,8 @@ def generate_equation(level):
     # if the user chooses level 1, generate an easy equation
     if level.lower() == "easy" or level == "e" or level == "1":
         operators = ["*", "-"]
-        x, y = random.randint(-10, 10)
+        x = random.randint(-10, 10)
+        y = random.randint(-10, 10)
         operator = random.choice(operators)
         if operator == "*":
             result = x * y
@@ -81,7 +82,9 @@ def generate_equation(level):
     # if the user chooses level 2, generate a medium equation
     elif level.lower() == "medium" or level == "m" or level == "2":
         operators = ["+", "-"]
-        x, y, z = random.randint(-10, 10)
+        x = random.randint(-10, 10)
+        y = random.randint(-10, 10)
+        z = random.randint(-10, 10)
         operator = random.choice(operators)
         if operator == "+":
             result = z * x + y
@@ -92,7 +95,9 @@ def generate_equation(level):
     # if the user chooses level 3, generate a hard equation
     elif level.lower() == "hard" or level == "h" or level == "3":
         operators = ["+", "*", "-"]
-        x, y, z = random.randint(-10, 10)
+        x = random.randint(-10, 10)
+        y = random.randint(-10, 10)
+        z = random.randint(-10, 10)
         operator = random.choice(operators)
         if operator == "+":
             result = y * x + z * x
@@ -135,13 +140,14 @@ if played_before == "no":
     instructions()
 
 questions_answered = 0
-
+questions_wrong = 0
 questions = check_questions()
 if questions == "":
     mode = "infinite"
     questions = 5
 else:
     mode = ""
+
 
 while True:
     print()
@@ -153,15 +159,20 @@ while True:
         heading = f"Question {questions_answered + 1} of {questions}"
         print(heading)
 
+    play_game()
+
     choose = input("Press Enter to play or 'xxx' to quit: ")
     if choose == "xxx":
         break
-
-    play_game()
 
     questions_answered += 1
     if questions_answered == questions:
         break
 
+
+questions_correct = questions_answered - questions_wrong
+
 print()
-print("Thank you for playing!")
+print("             ***** Summary *****")
+print(f"Questions correct: {questions_correct}  |  Questions wrong: {questions_wrong}")
+print()
