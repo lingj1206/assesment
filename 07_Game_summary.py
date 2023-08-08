@@ -1,7 +1,7 @@
 questions_answered = 0
 questions_wrong = 0
 
-testing = ["correct", "wrong", "correct"]
+testing = ["correct", "correct", "wrong",  "wrong", "correct"]
 
 for item in testing:
     questions_answered += 1

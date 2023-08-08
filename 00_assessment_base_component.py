@@ -62,14 +62,20 @@ def check_questions():
         return response
 
 
-# generate an equation based on the selected level
-def generate_equation(level):
+def generate_values():
+    x = random.randint(-10, 10)
+    y = random.randint(-10, 10)
+    z = random.randint(-10, 10)
 
+    return x, y, z
+
+
+# generate an equation based on the selected level
+def generate_equation(level, x, y, z):
+    operators = ["+", "-", "*"]
     # if the user chooses level 1, generate an easy equation
     if level.lower() == "easy" or level == "e" or level == "1":
-        operators = ["*", "-"]
-        x = random.randint(-10, 10)
-        y = random.randint(-10, 10)
+        # operators = ["*", "-"]
         operator = random.choice(operators)
         if operator == "*":
             result = x * y
@@ -79,10 +85,7 @@ def generate_equation(level):
             equation = f"x {operator} {y} = {result}"
     # if the user chooses level 2, generate a medium equation
     elif level.lower() == "medium" or level == "m" or level == "2":
-        operators = ["+", "-"]
-        x = random.randint(-10, 10)
-        y = random.randint(-10, 10)
-        z = random.randint(-10, 10)
+        # operators = ["+", "-"]
         operator = random.choice(operators)
         if operator == "+":
             result = z * x + y
@@ -92,10 +95,7 @@ def generate_equation(level):
             equation = f"{z}x {operator} {y} = {result}"
     # if the user chooses level 3, generate a hard equation
     elif level.lower() == "hard" or level == "h" or level == "3":
-        operators = ["+", "*", "-"]
-        x = random.randint(-10, 10)
-        y = random.randint(-10, 10)
-        z = random.randint(-10, 10)
+        # operators = ["+", "*", "-"]
         operator = random.choice(operators)
         if operator == "+":
             result = y * x + z * x
