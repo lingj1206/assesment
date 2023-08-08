@@ -4,8 +4,6 @@ import random
 # display instructions
 def instructions():
     print()
-    print("       *****  Welcome to my algebra quiz  *****")
-    print()
     print("You will have to select a level (easy, medium, hard or 1, 2, 3)")
     print("The computer will generate an equation based on the selected level")
     print("You are trying to find the value of 'x'")
@@ -134,6 +132,9 @@ def play_game():
 
 
 # Main routine
+print()
+print("       *****  Welcome to my algebra quiz  *****")
+print()
 played_before = yes_no("Have you played this game before? (yes/no): ")
 
 if played_before == "no":
