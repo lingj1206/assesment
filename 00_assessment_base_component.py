@@ -62,17 +62,12 @@ def check_questions():
         return response
 
 
-def generate_values():
+# generate an equation based on the selected level
+def generate_equation(level):
+    
     x = random.randint(-10, 10)
     y = random.randint(-10, 10)
     z = random.randint(-10, 10)
-
-    return x, y, z
-
-
-# generate an equation based on the selected level
-def generate_equation(level, x, y, z):
-
     operators = ["+", "-", "*"]
 
     # if the user chooses level 1, generate an easy equation
@@ -143,7 +138,7 @@ while True:
         print(heading)
 
     level = input("Select a level (easy/medium/hard) or (1/2/3): ")
-    equation, x = generate_equation(level, *generate_values())
+    equation, x = generate_equation(level)
 
     while True:
 
