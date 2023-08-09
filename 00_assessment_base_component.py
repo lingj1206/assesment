@@ -64,10 +64,12 @@ def check_questions():
 
 # generate an equation based on the selected level
 def generate_equation(level):
-    
+
+    # generating the random values
     x = random.randint(-10, 10)
     y = random.randint(-10, 10)
     z = random.randint(-10, 10)
+    # generating random operators
     operators = ["+", "-", "*"]
 
     # if the user chooses level 1, generate an easy equation
@@ -109,16 +111,22 @@ def generate_equation(level):
 
 
 # Main routine
+
+# introduction statement
 print()
 print("       *****  Welcome to my algebra quiz  *****")
 print()
+
+questions_answered = 0
+questions_wrong = 0
+
+# Check if the user has played before and show instructions if not
 played_before = yes_no("Have you played this game before? (yes/no): ")
 
 if played_before == "no":
     instructions()
 
-questions_answered = 0
-questions_wrong = 0
+# Get the number of questions or select infinite mode
 questions = check_questions()
 if questions == "":
     mode = "infinite"
@@ -126,7 +134,7 @@ if questions == "":
 else:
     mode = ""
 
-
+# Main game loop
 while True:
     print()
     if mode == "infinite":
@@ -137,9 +145,11 @@ while True:
         heading = f"Question {questions_answered + 1} of {questions}"
         print(heading)
 
+    # Get user-selected level and generate equation
     level = input("Select a level (easy/medium/hard) or (1/2/3): ")
     equation, x = generate_equation(level)
 
+    # Solve equations and provide feedback
     while True:
 
         if equation is not None and x is not None:
@@ -153,16 +163,17 @@ while True:
                 print(f"Sorry, the correct answer was {x}.")
 
             break
-
+    # Ask user if they want to play again or quit
     choose = input("Press Enter to play or 'xxx' to quit: ")
     if choose == "xxx":
         break
 
+    # Update question count
     questions_answered += 1
     if questions_answered == questions:
         break
 
-
+# Calculate and display summary
 questions_correct = questions_answered - questions_wrong
 
 print()
