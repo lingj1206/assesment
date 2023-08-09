@@ -4,19 +4,18 @@ def play_game():
         if level == "easy" or level == "1" or level == "e":
             print("You have selected the easy level.")
 
-            # break
+            break
         elif level == "medium" or level == "2" or level == "m":
             print("You have selected the medium level.")
 
-            # break
+            break
         elif level == "hard" or level == "3" or level == "h":
             print("You have selected the hard level.")
 
-            # break
+            break
         else:
             print("Please choose 'easy', 'medium', or 'hard', or 1, 2 or 3.")
-            # continue
+            continue
 
 
 play_game()
-

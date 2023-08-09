@@ -105,6 +105,8 @@ def generate_equation(level):
             result = y * x - z * x
             equation = f"{y}x {operator} {z}x = {result}"
     else:
+        print("Please choose 'easy', 'medium', or 'hard', or 1, 2 or 3.")
+
         return None, None
 
     return equation, x

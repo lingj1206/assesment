@@ -1,6 +1,5 @@
 def num_check(question):
-    valid = False
-    while not valid:
+    while True:
         error = "Please enter a valid number"
 
         try:
