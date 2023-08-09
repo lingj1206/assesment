@@ -72,10 +72,11 @@ def generate_values():
 
 # generate an equation based on the selected level
 def generate_equation(level, x, y, z):
+
     operators = ["+", "-", "*"]
+
     # if the user chooses level 1, generate an easy equation
     if level.lower() == "easy" or level == "e" or level == "1":
-        # operators = ["*", "-"]
         operator = random.choice(operators)
         if operator == "*":
             result = x * y
@@ -83,9 +84,9 @@ def generate_equation(level, x, y, z):
         else:
             result = x - y
             equation = f"x {operator} {y} = {result}"
+
     # if the user chooses level 2, generate a medium equation
     elif level.lower() == "medium" or level == "m" or level == "2":
-        # operators = ["+", "-"]
         operator = random.choice(operators)
         if operator == "+":
             result = z * x + y
@@ -93,9 +94,9 @@ def generate_equation(level, x, y, z):
         else:
             result = z * x - y
             equation = f"{z}x {operator} {y} = {result}"
+
     # if the user chooses level 3, generate a hard equation
     elif level.lower() == "hard" or level == "h" or level == "3":
-        # operators = ["+", "*", "-"]
         operator = random.choice(operators)
         if operator == "+":
             result = y * x + z * x
@@ -110,25 +111,6 @@ def generate_equation(level, x, y, z):
         return None, None
 
     return equation, x
-
-
-# checking if the answer the user inputted is correct
-def play_game():
-    while True:
-        level = input("Select a level (easy/medium/hard) or (1/2/3): ")
-        equation, x = generate_equation(level)
-
-        if equation is not None and x is not None:
-            print("Solve the following equation:")
-            print(equation)
-
-            answer = num_check("x = ")
-            if answer == x:
-                print("Congratulations! You got the correct answer.")
-            else:
-                print(f"Sorry, the correct answer was {x}.")
-
-            break
 
 
 # Main routine
@@ -160,7 +142,22 @@ while True:
         heading = f"Question {questions_answered + 1} of {questions}"
         print(heading)
 
-    play_game()
+    level = input("Select a level (easy/medium/hard) or (1/2/3): ")
+    equation, x = generate_equation(level, *generate_values())
+
+    while True:
+
+        if equation is not None and x is not None:
+            print("Solve the following equation:")
+            print(equation)
+
+            answer = num_check("x = ")
+            if answer == x:
+                print("Congratulations! You got the correct answer.")
+            else:
+                print(f"Sorry, the correct answer was {x}.")
+
+            break
 
     choose = input("Press Enter to play or 'xxx' to quit: ")
     if choose == "xxx":
