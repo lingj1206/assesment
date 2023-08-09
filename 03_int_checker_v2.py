@@ -1,6 +1,8 @@
 def int_check(question, low=None, exit_code=None):
     if low is None:
         error = "Please enter a valid integer"
+    elif low is not None:
+        print("hi")
     while True:
         response = input(question).lower()
         if response == exit_code:
