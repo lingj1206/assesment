@@ -38,14 +38,14 @@ def num_check(question):
             print(error)
 
 
-def choice_checker(question, valid_list):
-    error = "Please choose 'easy', 'medium', or 'hard', or 1, 2 or 3."
+def choice_checker(question, level_list):
+    error = "Please choose 'easy', 'medium', or 'hard', or e, m or h."
 
     while True:
         # ask for user choice
         response = input(question).lower()
 
-        for item in valid_list:
+        for item in level_list:
             if response == item[0] or response == item:
                 return item
 
@@ -135,13 +135,16 @@ print()
 
 questions_answered = 0
 questions_wrong = 0
-level_list = ["easy", "medium", "hard", "1", "2", "3", "e", "m", "h", 'xxx']
+level_list = ["easy", "medium", "hard", "e", "m", "h", 'xxx']
 
 # Check if the user has played before and show instructions if not
 played_before = yes_no("Have you played this game before? (yes/no): ")
 
 if played_before == "no":
     instructions()
+
+# Ask what level the user wants to answer
+level_wanted = choice_checker("Select a level (easy/medium/hard) or (e/m/h): ", level_list)
 
 # Get the number of questions or select infinite mode
 questions = check_questions()
@@ -163,7 +166,6 @@ while True:
         print(heading)
 
     # Get user-selected level and generate equation
-    level_wanted = choice_checker("Select a level (easy/medium/hard) or (e/m/h): ", level_list)
 
     if level_wanted.lower() == 'easy' or level_wanted == 'e':
         use_level = 'easy'
@@ -189,14 +191,15 @@ while True:
                 print(f"Sorry, the correct answer was {x}.")
                 questions_wrong += 1
             break
-    # Ask user if they want to play again or quit
-    choose = input("Press Enter to play or 'xxx' to quit: ")
-    if choose == "xxx":
-        break
 
     # Update question count
     questions_answered += 1
     if questions_answered == questions:
+        break
+
+    # Ask user if they want to play again or quit
+    choose = input("Press Enter to play or 'xxx' to quit: ")
+    if choose == "xxx":
         break
 
 # Calculate and display summary
