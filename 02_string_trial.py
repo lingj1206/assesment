@@ -1,5 +1,5 @@
 def choice_checker(question, valid_list):
-    error = "Please choose 'easy', 'medium', or 'hard', or 1, 2 or 3."
+    error = "Please choose 'easy', 'medium', or 'hard', or e, m or h."
 
     while True:
         # ask for user choice
@@ -13,16 +13,18 @@ def choice_checker(question, valid_list):
         print()
 
 
-level_list = ["easy", "medium", "hard", "1", "2", "3", "e", "m", "h"]
+level_list = ["easy", "medium", "hard", "e", "m", "h", 'xxx']
 
 while True:
     level_wanted = choice_checker("Choose!", level_list)
 
-    if level_wanted == 'easy' or level_wanted == "1" or level_wanted == 'e':
+    if level_wanted == 'easy' or level_wanted == 'e':
         use_level = 'easy'
-    elif level_wanted == 'medium' or level_wanted == '2' or level_wanted == 'm':
+    elif level_wanted == 'medium' or level_wanted == 'm':
         use_level = 'medium'
-    elif level_wanted == 'hard' or level_wanted == '3' or level_wanted == 'h':
+    elif level_wanted == 'hard' or level_wanted == 'h':
         use_level = 'hard'
+    elif level_wanted == 'xxx':
+        break
 
     print("you chose", use_level)
