@@ -1,4 +1,7 @@
 import math
+import pandas
+from datetime import date
+
 
 
 def num_check(question, error, num_type):
@@ -70,11 +73,19 @@ valid_shape_list = ["cube", "cuboid", "sphere", "cylinder", "square pyramid", "x
 shape_list = []
 volume_list = []
 surface_area_list = []
+length_list = []
+width_list = []
+height_list = []
+radius_list = []
 
 sa_v_dict = {
     "Shape": shape_list,
     "Volume": volume_list,
-    "Surface Area": surface_area_list
+    "Surface Area": surface_area_list,
+    "Length": length_list,
+    "Width": width_list,
+    "Height": height_list,
+    "Radius": radius_list
 }
 
 # loop
@@ -86,29 +97,83 @@ while True:
 
     elif random_shape == "cube":
         length = num_check("what is the length: ", "please enter a positive integer", float)
+        width = "-"
+        height = "-"
+        radius = "-"
         volume, surface_area = cube(length)
 
     elif random_shape == "cuboid":
         length = num_check("what is the length: ", "please enter a positive integer", float)
         width = num_check("what is the width: ", "please enter a positive integer", float)
         height = num_check("what is the height: ", "please enter a positive integer", float)
+        radius = "-"
         volume, surface_area = cuboid(length, width, height)
 
     elif random_shape == "cylinder":
+        width = "-"
+        length = "-"
         radius = num_check("what is the radius: ", "please enter a positive integer", float)
         height = num_check("what is the height: ", "please enter a positive integer", float)
         volume, surface_area = cylinder(radius, height)
 
     elif random_shape == "sphere":
+        width = "-"
+        height = "-"
+        length = "-"
         radius = num_check("what is the radius: ", "please enter a positive integer", float)
         volume, surface_area = sphere(radius)
 
     else:
+        width = "-"
+        radius ="-"
         length = num_check("what is the base length: ", "please enter a positive integer", float)
         height = num_check("what is the height: ", "please enter a positive integer", float)
         volume, surface_area = sq_pyramid(length, height)
 
-    print(volume, surface_area)
+    print(f"The volume is {volume:.2f} cubic units\n"
+          f"The surface area is {surface_area:.2f} square units")
+
     shape_list.append(random_shape)
     volume_list.append(volume)
     surface_area_list.append(surface_area)
+    length_list.append(length)
+    width_list.append(width)
+    height_list.append(height)
+    radius_list.append(radius)
+
+sa_v_frame = pandas.DataFrame(sa_v_dict)
+sa_v_frame = sa_v_frame.set_index("Shape")
+
+# get today's date
+today = date.today()
+
+# Get day, month and year as individual strings
+day = today.strftime("%d")
+month = today.strftime("%m")
+year = today.strftime("%y")
+
+heading = f"---- Mini Movie Fundraiser Ticket Data ({day}/{month}/{year})"
+file_name = f"MMF_{year}_{month}_{day}"
+
+# change frame to string so that we can export it to file
+sa_v_frame_string = str(sa_v_frame)
+
+# list holding content to print / write to file
+to_write = [file_name, ]
+for item in to_write:
+    print(item)
+    # Write to file
+    # create file to hold data (add .txt extension)
+
+    text_file = open(file_name)
+    # heading
+for item in to_write:
+    text_file.write(item)
+
+    text_file.write("\n")
+# close file
+
+text_file.close()
+
+
+print(sa_v_frame)
