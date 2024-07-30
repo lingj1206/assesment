@@ -3,7 +3,6 @@ import pandas
 from datetime import date
 
 
-
 def num_check(question, error, num_type):
     while True:
         try:
@@ -19,7 +18,7 @@ def num_check(question, error, num_type):
 
 
 def shape(question, shape_list):
-    error = "Please choose one of the following shapes: cube, cuboid, sphere, cylinder or square based pyramid"
+    error = "Please choose one of the following shapes: cube, cuboid, sphere, cylinder or square pyramid"
 
     while True:
         # ask for user choice
@@ -87,6 +86,7 @@ sa_v_dict = {
     "Height": height_list,
     "Radius": radius_list
 }
+program_name = input("Filename: ")
 
 # loop
 while True:
@@ -125,7 +125,7 @@ while True:
 
     else:
         width = "-"
-        radius ="-"
+        radius = "-"
         length = num_check("what is the base length: ", "please enter a positive integer", float)
         height = num_check("what is the height: ", "please enter a positive integer", float)
         volume, surface_area = sq_pyramid(length, height)
@@ -152,21 +152,20 @@ day = today.strftime("%d")
 month = today.strftime("%m")
 year = today.strftime("%y")
 
-heading = f"---- Mini Movie Fundraiser Ticket Data ({day}/{month}/{year})"
-file_name = f"MMF_{year}_{month}_{day}"
+heading = f"3D shape volume/surface area calculator Data ({day}/{month}/{year})"
 
 # change frame to string so that we can export it to file
 sa_v_frame_string = str(sa_v_frame)
 
 # list holding content to print / write to file
-to_write = [file_name, ]
+to_write = [heading, sa_v_frame_string]
 for item in to_write:
     print(item)
     # Write to file
     # create file to hold data (add .txt extension)
-
-    text_file = open(file_name)
-    # heading
+    file_name = f"{program_name}.txt"
+    text_file = open(file_name, "w+")
+# heading
 for item in to_write:
     text_file.write(item)
 
@@ -174,6 +173,3 @@ for item in to_write:
 # close file
 
 text_file.close()
-
-
-print(sa_v_frame)
