@@ -23,7 +23,11 @@ def yes_no(question, yes_no_list):
 
 def instructions():
     print()
-    print("")
+    print("Firstly you will need to give the file a name.\n"
+          "Then you have to pick a valid shape\n"
+          "(cube, cuboid, sphere, cylinder, and square pyramid)\n"
+          "The program will tell you what the surface area and volume is.\n"
+          "")
 
 
 # number checker
@@ -94,6 +98,7 @@ def sq_pyramid(length, height):
 # lists go here
 # list of valid shapes
 valid_shape_list = ["cube", "cuboid", "sphere", "cylinder", "square pyramid", "xxx"]
+yes_no_list = ["yes", "no", "y", "n"]
 shape_list = []
 volume_list = []
 surface_area_list = []
@@ -111,6 +116,13 @@ sa_v_dict = {
     "Height": height_list,
     "Radius": radius_list
 }
+
+want_instructions = yes_no("Do you want to see instructions?: ", yes_no_list)
+print()
+
+if want_instructions == "yes":
+    instructions()
+
 program_name = input("Filename: ")
 
 # loop
@@ -198,4 +210,3 @@ for item in to_write:
 # close file
 
 text_file.close()
-
