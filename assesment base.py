@@ -21,11 +21,13 @@ def yes_no(question, yes_no_list):
         print()
 
 
+# instructions
 def instructions():
     print()
     print("Firstly you will need to give the file a name.\n"
           "Then you have to pick a valid shape\n"
           "(cube, cuboid, sphere, cylinder, and square pyramid)\n"
+          "You will need to tell the program what the parameters of the shape are\n"
           "The program will tell you what the surface area and volume is.\n"
           "")
 
@@ -98,6 +100,7 @@ def sq_pyramid(length, height):
 # lists go here
 # list of valid shapes
 valid_shape_list = ["cube", "cuboid", "sphere", "cylinder", "square pyramid", "xxx"]
+# yes/no list
 yes_no_list = ["yes", "no", "y", "n"]
 shape_list = []
 volume_list = []
@@ -107,6 +110,7 @@ width_list = []
 height_list = []
 radius_list = []
 
+# set up dictionary for panda
 sa_v_dict = {
     "Shape": shape_list,
     "Volume": volume_list,
@@ -117,59 +121,71 @@ sa_v_dict = {
     "Radius": radius_list
 }
 
+# asks the user if they want the instructions
 want_instructions = yes_no("Do you want to see instructions?: ", yes_no_list)
 print()
 
+# show the instructions if they want it
 if want_instructions == "yes":
     instructions()
 
+# asks user for the filename
 program_name = input("Filename: ")
 
 # loop
 while True:
+    # asks the user to pick a shape
     random_shape = shape("pick a shape: ", valid_shape_list)
 
+    # breaks the loop when 'xxx' is entered
     if random_shape == "xxx":
         break
 
+    # asks for the length
     elif random_shape == "cube":
         length = num_check("what is the length: ", "please enter a positive integer", float)
-        width = "-"
-        height = "-"
-        radius = "-"
+        width = ""
+        height = ""
+        radius = ""
         volume, surface_area = cube(length)
 
+    # asks for the length, width and height
     elif random_shape == "cuboid":
         length = num_check("what is the length: ", "please enter a positive integer", float)
         width = num_check("what is the width: ", "please enter a positive integer", float)
         height = num_check("what is the height: ", "please enter a positive integer", float)
-        radius = "-"
+        radius = ""
         volume, surface_area = cuboid(length, width, height)
 
+    # asks for the height and radius
     elif random_shape == "cylinder":
-        width = "-"
-        length = "-"
+        width = ""
+        length = ""
         radius = num_check("what is the radius: ", "please enter a positive integer", float)
         height = num_check("what is the height: ", "please enter a positive integer", float)
         volume, surface_area = cylinder(radius, height)
 
+    # asks for the radius
     elif random_shape == "sphere":
-        width = "-"
-        height = "-"
-        length = "-"
+        width = ""
+        height = ""
+        length = ""
         radius = num_check("what is the radius: ", "please enter a positive integer", float)
         volume, surface_area = sphere(radius)
 
+    # asks for the base length and height
     else:
-        width = "-"
-        radius = "-"
+        width = ""
+        radius = ""
         length = num_check("what is the base length: ", "please enter a positive integer", float)
         height = num_check("what is the height: ", "please enter a positive integer", float)
         volume, surface_area = sq_pyramid(length, height)
 
+    # prints the volume and surface area
     print(f"The volume is {volume:.2f} cubic units\n"
           f"The surface area is {surface_area:.2f} square units")
 
+    # appends things to lists
     shape_list.append(random_shape)
     volume_list.append(volume)
     surface_area_list.append(surface_area)
