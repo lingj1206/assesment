@@ -18,5 +18,5 @@ def cube(length):
     return f'Volume is: {volume}, Surface area is: {surface_area}'
 
 
-my_ans = num_check(f"what is the length", "please enter a positive integer", float)
+my_ans = num_check(f"what is the length: ", "please enter a positive integer", float)
 print(cube(my_ans))

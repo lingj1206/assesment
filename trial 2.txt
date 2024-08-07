@@ -1,0 +1,8 @@
+3D shape volume/surface area calculator Data (06/08/24)
+                    Volume  Surface Area Length Width Height Radius
+Shape                                                              
+cube            125.000000    150.000000    5.0                    
+cuboid           70.000000    118.000000    5.0   2.0    7.0       
+cylinder        157.079500    219.911300                 2.0    5.0
+sphere          523.467434    314.159000                        5.0
+square pyramid   37.566667     77.804729    3.5          9.2       

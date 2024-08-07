@@ -13,7 +13,8 @@ def shape(question, shape_list):
         print(error)
 
 
-shape_list = ["cube", "cuboid", "sphere", "cylinder", "square based pyramid"]
+shape_list = ["cube", "cuboid", "sphere", "cylinder", "square pyramid"]
 
 while True:
     random_shape = shape("pick a shape: ", shape_list)
+    print(f"you picked: {random_shape}\n")

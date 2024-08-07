@@ -33,10 +33,11 @@ def instructions():
 
 
 # number checker
-def num_check(question, error, num_type):
+def num_check(question):
+    error = "please enter a positive integer"
     while True:
         try:
-            response = num_type(input(question))
+            response = float(input(question))
 
             if response <= 0:
                 print(error)
@@ -136,6 +137,7 @@ program_name = input("Filename: ")
 while True:
     # asks the user to pick a shape
     random_shape = shape("pick a shape: ", valid_shape_list)
+    print()
 
     # breaks the loop when 'xxx' is entered
     if random_shape == "xxx":
@@ -143,7 +145,7 @@ while True:
 
     # asks for the length
     elif random_shape == "cube":
-        length = num_check("what is the length: ", "please enter a positive integer", float)
+        length = num_check("what is the length: ")
         width = ""
         height = ""
         radius = ""
@@ -151,9 +153,9 @@ while True:
 
     # asks for the length, width and height
     elif random_shape == "cuboid":
-        length = num_check("what is the length: ", "please enter a positive integer", float)
-        width = num_check("what is the width: ", "please enter a positive integer", float)
-        height = num_check("what is the height: ", "please enter a positive integer", float)
+        length = num_check("what is the length: ")
+        width = num_check("what is the width: ")
+        height = num_check("what is the height: ")
         radius = ""
         volume, surface_area = cuboid(length, width, height)
 
@@ -161,8 +163,8 @@ while True:
     elif random_shape == "cylinder":
         width = ""
         length = ""
-        radius = num_check("what is the radius: ", "please enter a positive integer", float)
-        height = num_check("what is the height: ", "please enter a positive integer", float)
+        radius = num_check("what is the radius: ")
+        height = num_check("what is the height: ")
         volume, surface_area = cylinder(radius, height)
 
     # asks for the radius
@@ -170,20 +172,20 @@ while True:
         width = ""
         height = ""
         length = ""
-        radius = num_check("what is the radius: ", "please enter a positive integer", float)
+        radius = num_check("what is the radius: ")
         volume, surface_area = sphere(radius)
 
     # asks for the base length and height
     else:
         width = ""
         radius = ""
-        length = num_check("what is the base length: ", "please enter a positive integer", float)
-        height = num_check("what is the height: ", "please enter a positive integer", float)
+        length = num_check("what is the base length: ")
+        height = num_check("what is the height: ")
         volume, surface_area = sq_pyramid(length, height)
 
     # prints the volume and surface area
-    print(f"The volume is {volume:.2f} cubic units\n"
-          f"The surface area is {surface_area:.2f} square units")
+    print(f"\nThe volume is {volume:.2f} cubic units\n"
+          f"The surface area is {surface_area:.2f} square units\n")
 
     # appends things to lists
     shape_list.append(random_shape)
@@ -194,6 +196,7 @@ while True:
     height_list.append(height)
     radius_list.append(radius)
 
+# create panda
 sa_v_frame = pandas.DataFrame(sa_v_dict)
 sa_v_frame = sa_v_frame.set_index("Shape")
 

@@ -15,9 +15,13 @@ def yes_no(question, yes_no_list):
 
 yes_no_list = ["yes", "no"]
 
+# while True:
+#     is_gay = yes_no("Are you gay? ", yes_no_list)
+#     if is_gay == "yes":
+#         print("y")
+#     else:
+#         print("y u lie")
+
 while True:
-    is_gay = yes_no("Are you gay? ", yes_no_list)
-    if is_gay == "yes":
-        print("y")
-    else:
-        print("y u lie")
+    yes_or_no = yes_no("Pick yes or no: ", yes_no_list)
+    print(f"You chose {yes_or_no}\n")
