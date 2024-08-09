@@ -1,7 +1,9 @@
-def num_check(question, error, num_type):
+def num_check(question):
     while True:
+        error = "Please enter a positive number" \
+                "that more than zero"
         try:
-            response = num_type(input(question))
+            response = float(input(question))
 
             if response <= 0:
                 print(error)
@@ -12,4 +14,5 @@ def num_check(question, error, num_type):
             print(error)
 
 
-random_number = num_check("pick a random number: ", "thats not a valid number", float)
+random_number = num_check("Enter a number: ")
+print("program continues")
