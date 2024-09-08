@@ -34,7 +34,7 @@ def instructions():
 
 # number checker
 def num_check(question):
-    error = "please enter a positive integer"
+    error = "please enter a positive number"
     while True:
         try:
             response = float(input(question))
@@ -103,6 +103,7 @@ def sq_pyramid(length, height):
 valid_shape_list = ["cube", "cuboid", "sphere", "cylinder", "square pyramid", "xxx"]
 # yes/no list
 yes_no_list = ["yes", "no", "y", "n"]
+# empty lists for the panda
 shape_list = []
 volume_list = []
 surface_area_list = []
@@ -122,6 +123,9 @@ sa_v_dict = {
     "Radius": radius_list
 }
 
+#
+print("***** Welcome to my 3d shape surface area/ volume calculator *****\n")
+
 # asks the user if they want the instructions
 want_instructions = yes_no("Do you want to see instructions?: ", yes_no_list)
 print()
@@ -130,9 +134,16 @@ print()
 if want_instructions == "yes":
     instructions()
 
-# asks user for the filename
-program_name = input("Filename: ")
+while True:
+    # asks user for the filename
+    program_name = input("Filename: ")
+    if program_name.strip() == "":
+        print("filename can't be blank")
+    else:
+        break
+print()
 
+questions_answered = 0
 # loop
 while True:
     # asks the user to pick a shape
@@ -146,9 +157,9 @@ while True:
     # asks for the length
     elif random_shape == "cube":
         length = num_check("what is the length: ")
-        width = ""
-        height = ""
-        radius = ""
+        width = "-"
+        height = "-"
+        radius = "-"
         volume, surface_area = cube(length)
 
     # asks for the length, width and height
@@ -156,36 +167,42 @@ while True:
         length = num_check("what is the length: ")
         width = num_check("what is the width: ")
         height = num_check("what is the height: ")
-        radius = ""
+        radius = "-"
         volume, surface_area = cuboid(length, width, height)
 
     # asks for the height and radius
     elif random_shape == "cylinder":
-        width = ""
-        length = ""
+        width = "-"
+        length = "-"
         radius = num_check("what is the radius: ")
         height = num_check("what is the height: ")
         volume, surface_area = cylinder(radius, height)
 
     # asks for the radius
     elif random_shape == "sphere":
-        width = ""
-        height = ""
-        length = ""
+        width = "-"
+        height = "-"
+        length = "-"
         radius = num_check("what is the radius: ")
         volume, surface_area = sphere(radius)
 
     # asks for the base length and height
     else:
-        width = ""
-        radius = ""
+        width = "-"
+        radius = "-"
         length = num_check("what is the base length: ")
         height = num_check("what is the height: ")
         volume, surface_area = sq_pyramid(length, height)
 
+    # set volume and surface area to 2 decimal places
+    volume = f"{volume:.4f}"
+    surface_area = f"{surface_area:.4f}"
+
     # prints the volume and surface area
-    print(f"\nThe volume is {volume:.2f} cubic units\n"
-          f"The surface area is {surface_area:.2f} square units\n")
+    print(f"\nThe volume is {volume} cubic units\n"
+          f"The surface area is {surface_area} square units\n")
+
+    questions_answered += 1
 
     # appends things to lists
     shape_list.append(random_shape)
@@ -196,36 +213,42 @@ while True:
     height_list.append(height)
     radius_list.append(radius)
 
-# create panda
-sa_v_frame = pandas.DataFrame(sa_v_dict)
-sa_v_frame = sa_v_frame.set_index("Shape")
+#
+if questions_answered > 0:
 
-# get today's date
-today = date.today()
+    # create panda
+    sa_v_frame = pandas.DataFrame(sa_v_dict)
+    sa_v_frame = sa_v_frame.set_index("Shape")
 
-# Get day, month and year as individual strings
-day = today.strftime("%d")
-month = today.strftime("%m")
-year = today.strftime("%y")
+    # get today's date
+    today = date.today()
 
-heading = f"3D shape volume/surface area calculator Data ({day}/{month}/{year})"
+    # Get day, month and year as individual strings
+    day = today.strftime("%d")
+    month = today.strftime("%m")
+    year = today.strftime("%y")
 
-# change frame to string so that we can export it to file
-sa_v_frame_string = str(sa_v_frame)
+    heading = f"3D shape volume/surface area calculator Data ({day}/{month}/{year})"
 
-# list holding content to print / write to file
-to_write = [heading, sa_v_frame_string]
-for item in to_write:
-    print(item)
-    # Write to file
-    # create file to hold data (add .txt extension)
-    file_name = f"{program_name}.txt"
-    text_file = open(file_name, "w+")
-# heading
-for item in to_write:
-    text_file.write(item)
+    # change frame to string so that we can export it to file
+    sa_v_frame_string = str(sa_v_frame)
 
-    text_file.write("\n")
-# close file
+    # list holding content to print / write to file
+    to_write = [heading, sa_v_frame_string]
+    for item in to_write:
+        print(item)
+        # Write to file
+        # create file to hold data (add .txt extension)
+        file_name = f"{program_name}.txt"
+        text_file = open(file_name, "w+")
+    # heading
+    for item in to_write:
+        text_file.write(item)
 
-text_file.close()
+        text_file.write("\n")
+    # close file
+
+    text_file.close()
+else:
+    print("y")
+
