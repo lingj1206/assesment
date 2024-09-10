@@ -5,32 +5,14 @@ from datetime import date
 
 # functions go here
 
-# yes, no checker
-def yes_no(question, yes_no_list):
-    error = "Please choose 'yes' or 'no'"
-
+# choice checker
+def choice_checker(question, valid_list, error, num_of_characters):
     while True:
         # ask for user choice
         response = input(question).lower()
 
-        for item in yes_no_list:
-            if response == item[0] or response == item:
-                return item
-
-        print(error)
-        print()
-
-
-# checks that the shape is one of the valid shapes
-def shape(question, shape_list):
-    error = "Please choose one of the following shapes: cube, cuboid, sphere, cylinder or square pyramid"
-
-    while True:
-        # ask for user choice
-        response = input(question).lower()
-
-        for item in shape_list:
-            if response == item:
+        for item in valid_list:
+            if response == item[num_of_characters] or response == item:
                 return item
 
         print(error)
@@ -127,7 +109,8 @@ sa_v_dict = {
 print("***** Welcome to my 3d shape surface area/ volume calculator *****\n")
 
 # asks the user if they want the instructions
-want_instructions = yes_no("Do you want to see instructions?: ", yes_no_list)
+want_instructions = choice_checker("Do you want to see instructions?: ", yes_no_list,
+                                   "Please choose 'yes' or 'no'", 0)
 print()
 
 # show the instructions if they want it
@@ -147,7 +130,10 @@ questions_answered = 0
 # loop
 while True:
     # asks the user to pick a shape
-    random_shape = shape("pick a shape: ", valid_shape_list)
+    random_shape = choice_checker("pick a shape: ", valid_shape_list,
+            "Please choose one of the following"
+            " shapes: cube, cuboid, sphere, cylinder or square pyramid",
+                                  1)
     print()
 
     # breaks the loop when 'xxx' is entered

@@ -1,0 +1,4 @@
+3D shape volume/surface area calculator Data (10/09/24)
+       Volume Surface Area  Length Width Height Radius
+Shape                                                 
+cube   8.0000      24.0000     2.0     -      -      -
